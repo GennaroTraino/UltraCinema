@@ -24,6 +24,6 @@ public class PopupReportController {
         ricaviLabel.setText(String.valueOf(ricavo));
         reportTime.setText(reportPeriodo);
         salaLabel.setText(nomeSala);
-        //logoImage = new ImageView("biglietteria/Logo.png");
+        logoImage.setImage(new Image("biglietteria\\Logo.png"));
     }
 }

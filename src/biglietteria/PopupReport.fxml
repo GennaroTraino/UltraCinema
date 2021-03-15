@@ -1,50 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PopupReportController">
    <children>
-      <ImageView fitHeight="98.0" fitWidth="122.0" layoutX="151.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="14.0">
-         <image>
-            <Image />
-         </image>
+      <ImageView fx:id="logoImage" fitHeight="98.0" fitWidth="122.0" layoutX="151.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="14.0">
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="112.0" prefHeight="54.0" prefWidth="130.0" text="REPORT" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="112.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="112.0" prefHeight="54.0" prefWidth="130.0" text="REPORT" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="112.0">
          <font>
             <Font name="Noto Sans" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="268.0" prefHeight="54.0" prefWidth="174.0" text="BIGLIETTI:" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="268.0" prefHeight="54.0" prefWidth="174.0" text="BIGLIETTI:" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="87.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font name="Noto Sans" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="bigliettiLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="268.0" prefHeight="54.0" prefWidth="130.0" text="00" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="bigliettiLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="268.0" prefHeight="54.0" prefWidth="130.0" text="00" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="87.0" AnchorPane.rightAnchor="60.0">
          <font>
             <Font name="Noto Sans" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="322.0" prefHeight="54.0" prefWidth="156.0" text="RICAVI:" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="322.0" prefHeight="54.0" prefWidth="156.0" text="RICAVI:" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font name="Noto Sans" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="ricaviLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="322.0" prefHeight="54.0" prefWidth="130.0" text="00" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="ricaviLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="322.0" prefHeight="54.0" prefWidth="130.0" text="00" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="60.0">
          <font>
             <Font name="Noto Sans" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="reportTime" alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="146.0" prefHeight="54.0" prefWidth="130.0" text="Giornaliero" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="146.0">
+      <Label fx:id="reportTime" alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="146.0" prefHeight="33.0" prefWidth="154.0" text="Giornaliero" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="221.0" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="146.0">
          <font>
             <Font name="Noto Sans" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="salaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="200.0" prefHeight="54.0" prefWidth="174.0" text="SALA: A1" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="salaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="200.0" prefHeight="54.0" prefWidth="174.0" text="SALA: A1" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="113.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font name="Noto Sans" size="20.0" />
          </font>

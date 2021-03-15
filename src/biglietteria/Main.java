@@ -19,6 +19,8 @@ public class Main extends Application {
         primaryStage.setTitle("Benvenuto");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+
+        //TODO rimuovere sotto sono solo test
         CommandManager manager = CommandManager.getInstance();
         manager.execute(new ReportSala("A1","giornaliero"));
 

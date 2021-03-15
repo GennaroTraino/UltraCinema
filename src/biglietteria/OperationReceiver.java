@@ -27,8 +27,6 @@ public class OperationReceiver {
      * Richiamabile Da Admin Tramite CommandManager
      */
     public void reportSala(String nomeSala, String reportPeriodo) {
-        //Variabili
-        float ricavo = 0.0f;
 
         Connection connection = null;
         PreparedStatement preparedStatement=null;
@@ -70,14 +68,16 @@ public class OperationReceiver {
             }
 
             //Scorri tuple restituite dalla query e mi calcolo in base al periodo stabilito dal report le informazioni
+            float ricavo = 0.0f;
+
             while (rs.next()) {
-                if(LocalDate.parse(rs.getString("data")).toEpochDay() > reportDate.toEpochDay()){
+                if(LocalDate.parse(rs.getString("data")).isAfter(reportDate)){
                     n_rows = rs.getRow();
-                    ricavo += rs.getFloat("prezzo");
+                    ricavo = ricavo + rs.getFloat("prezzo");
+                    System.out.println("Aggiungo: " + rs.getFloat("prezzo") +
+                            "data" + LocalDate.parse(rs.getString("data")));
                 }
             }
-            //TODO POPUP REPORT
-            System.out.println("Dati: " + n_rows + " " + ricavo);
 
             try {
                 Stage secondaryStage = new Stage();
@@ -86,8 +86,8 @@ public class OperationReceiver {
                 Pane root = null;
                 root = loader.load(getClass().getResource("PopupReport.fxml").openStream());
                 PopupReportController pc = loader.getController();
-                pc.getData(nomeSala,n_rows,ricavo,reportPeriodo);
-                Scene scene = new Scene(root,700,425);
+                pc.getData(nomeSala,n_rows,ricavo,reportPeriodo.toUpperCase());
+                Scene scene = new Scene(root,400,400);
                 secondaryStage.setScene(scene);
                 secondaryStage.show();
             } catch (Exception e) {

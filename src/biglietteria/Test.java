@@ -9,9 +9,11 @@ public class Test {
 
         //operazioni
         CommandManager manager = CommandManager.getInstance();
-        manager.execute(new AggiungiFilm(new Film("harry","bho","fantasy",30.0f)));
-        manager.execute(new AggiornaPrezzoFilm("pio", 25.0f));
-        manager.execute(new ReportSala("A1","giornaliero"));
+        //manager.execute(new AggiungiFilm(new Film("harry","bho","fantasy",30.0f)));
+        //manager.execute(new AggiornaPrezzoFilm("pio", 25.0f));
+
+        // Non posso fare qui il report sala mi serve un event Action
+        //manager.execute(new ReportSala("A1","giornaliero"));
 
         //biglietti
         String date = "2021-03-20";
