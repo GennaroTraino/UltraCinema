@@ -21,8 +21,8 @@ public class Main extends Application {
         primaryStage.show();
 
         //TODO rimuovere sotto sono solo test
-        CommandManager manager = CommandManager.getInstance();
-        manager.execute(new ReportSala("A1","giornaliero"));
+        //CommandManager manager = CommandManager.getInstance();
+        //manager.execute(new ReportSala("A1","giornaliero"));
 
     }
 

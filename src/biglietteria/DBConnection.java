@@ -179,9 +179,9 @@ public class DBConnection {
                     "name varchar(50) NOT NULL,"+
                     "data TEXT NOT NULL,"+
                     "ora TEXT NOT NULL,"+
+                    "dataoraacquisto TEXT NOT NULL,"+
                     "intero BOOLEAN NOT NULL,"+
-                    "prezzo REAL NOT NULL," +
-                    "PRIMARY KEY (nomesala,name,data,ora))";
+                    "prezzo REAL NOT NULL)";
             connection = connect();
             statement = connection.createStatement();
             // Eseguo la query

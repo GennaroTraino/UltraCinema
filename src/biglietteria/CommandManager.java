@@ -11,6 +11,7 @@ public class CommandManager {
     //
     private Stack<CommandAdmin> stackAdmin = null;
     private Stack<CommandUser> stackUser = null;
+    private Stack<Pagamento> stackPagamento = null;
     private static CommandManager instance = null;
 
     //Singleton
@@ -24,6 +25,7 @@ public class CommandManager {
     private CommandManager() {
         stackUser = new Stack<>();
         stackAdmin = new Stack<>();
+        stackPagamento = new Stack<>();
     }
 
     /**
@@ -55,6 +57,19 @@ public class CommandManager {
     void undo() {
         stackUser.peek().undo();
         stackUser.pop();
+
+        stackPagamento.peek().undo();
+        stackPagamento.pop();
+    }
+
+
+
+    void execute(Pagamento command) {
+        if (stackPagamento.empty()) {
+            stackPagamento.push(command);
+        }
+        stackPagamento.peek().execute();
+        stackPagamento.push(command);
     }
 
     /**

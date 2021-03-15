@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PrincipaleController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="biglietteria.PrincipaleController">
    <children>
       <ComboBox fx:id="comboBoxFilm" layoutX="472.0" layoutY="105.0" onMouseDragEntered="#filmSelected" prefWidth="150.0" promptText="Seleziona un Film" style="-fx-background-color: #ffffff; -fx-border-radius: 0.2;" />
       <ComboBox fx:id="comboBoxOrari" layoutX="472.0" layoutY="140.0" onMouseDragEntered="#timeSelected" prefHeight="25.0" prefWidth="81.0" promptText="Ora" style="-fx-background-color: #ffffff; -fx-border-radius: 0.2;" />

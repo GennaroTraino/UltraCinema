@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,8 +45,6 @@ public class OperationReceiver {
             ResultSet rs = preparedStatement.executeQuery();
 
             //Definisco variabili per calcolo di somma entrate, numero biglietti
-            int n_rows = 0;
-            int posti = rs.getInt("nposti");
 
             //PERIODO stabilisce la data per il report
             LocalDate reportDate;
@@ -69,31 +68,29 @@ public class OperationReceiver {
 
             //Scorri tuple restituite dalla query e mi calcolo in base al periodo stabilito dal report le informazioni
             float ricavo = 0.0f;
+            int n_rows = 0;
 
             while (rs.next()) {
                 if(LocalDate.parse(rs.getString("data")).isAfter(reportDate)){
                     n_rows = rs.getRow();
                     ricavo = ricavo + rs.getFloat("prezzo");
-                    System.out.println("Aggiungo: " + rs.getFloat("prezzo") +
-                            "data" + LocalDate.parse(rs.getString("data")));
-                }
+                    }
             }
 
             try {
                 Stage secondaryStage = new Stage();
                 secondaryStage.setTitle("Popup");
                 FXMLLoader loader = new FXMLLoader();
-                Pane root = null;
+                Pane root;
                 root = loader.load(getClass().getResource("PopupReport.fxml").openStream());
                 PopupReportController pc = loader.getController();
                 pc.getData(nomeSala,n_rows,ricavo,reportPeriodo.toUpperCase());
                 Scene scene = new Scene(root,400,400);
                 secondaryStage.setScene(scene);
                 secondaryStage.show();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -184,6 +181,7 @@ public class OperationReceiver {
             // Esecuzione query
             preparedStatement.executeUpdate();
         }catch (Exception e){
+            //TODO devi fare qualcosa per l'aggiunta di un film
             System.out.println("film gia aggiunto");
 
         }finally {
@@ -253,14 +251,14 @@ public class OperationReceiver {
      * Richiamabile Da User tramite CommandUser
      */
     //TODO da fare tutta
-    public void acquistaBiglietto(String nomeSala, String nomeFilm, String name,
-                                  LocalDateTime dataOra, boolean intero, Float prezzo) {
+    public void acquistaBiglietto(String nomeSala, String nomeFilm, String name, LocalDateTime dataOra,
+                                  LocalDateTime dataoraacquisto, boolean intero, Float prezzo) {
 
         Connection connection = null;
         PreparedStatement preparedStatement=null;
         try{
             // Query
-            String query = "INSERT INTO biglietti(nomesala,nomefilm,name,data,ora,intero,prezzo) VALUES(?,?,?,?,?,?,?)";
+            String query = "INSERT INTO biglietti(nomesala,nomefilm,name,data,ora,dataoraacquisto,intero,prezzo) VALUES(?,?,?,?,?,?,?,?)";
             // Connessione
             connection = DBConnection.connect();
             // Creazione Statement
@@ -271,13 +269,13 @@ public class OperationReceiver {
             preparedStatement.setString(3,name);
             preparedStatement.setString(4,dataOra.toLocalDate().toString());
             preparedStatement.setString(5,dataOra.toLocalTime().toString());
-            preparedStatement.setBoolean(6,intero);
-            preparedStatement.setFloat(7,prezzo);
+            preparedStatement.setString(6,dataoraacquisto.toString());
+            preparedStatement.setBoolean(7,intero);
+            preparedStatement.setFloat(8,prezzo);
 
             // Esecuzione query
             preparedStatement.executeUpdate();
         }catch (Exception e){
-            System.out.println("biglietto gia venduto");
         }finally {
             // Chiusura oggetti
             if(connection!=null) {
@@ -303,7 +301,7 @@ public class OperationReceiver {
      * Richiamabile Da User tramite CommandUser
      */
     //TODO da fare tutta
-    public void undoBiglietto(String nomeSala,String name,LocalDateTime dataOra) {
+    public void undoBiglietto(String nomeSala,String name,LocalDateTime dataOra, LocalDateTime dataOraAcquisto) {
         Connection connection = null;
         PreparedStatement preparedStatement=null;
         try{
@@ -318,10 +316,8 @@ public class OperationReceiver {
             preparedStatement.setString(2,name);
             preparedStatement.setString(3,dataOra.toLocalDate().toString());
             preparedStatement.setString(4,dataOra.toLocalTime().toString());
-            System.out.println("DATA" + dataOra.toLocalDate().toString());
-            System.out.println("ORA" + dataOra.toLocalTime().toString());
-//TODO SE NON SONO PASSATI GIA DIECI MINUTI
-            if (LocalDateTime.now().minusMinutes(10).getMinute() > dataOra.getMinute()) {
+
+            if (LocalDateTime.now().isBefore(dataOraAcquisto.minusMinutes(10))) {
                 System.out.println("Passati gia 10 minuti");
             } else {
                 //POSSO ESEGUIRE LA QUERY

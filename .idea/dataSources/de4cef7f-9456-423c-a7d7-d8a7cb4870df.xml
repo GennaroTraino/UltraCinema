@@ -1359,154 +1359,142 @@
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="500" parent="170" name="intero">
+    <column id="500" parent="170" name="dataoraacquisto">
       <Position>6</Position>
+      <DataType>TEXT|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="501" parent="170" name="intero">
+      <Position>7</Position>
       <DataType>BOOLEAN|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="501" parent="170" name="prezzo">
-      <Position>7</Position>
+    <column id="502" parent="170" name="prezzo">
+      <Position>8</Position>
       <DataType>REAL|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="502" parent="170" name="sqlite_autoindex_biglietti_1">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>nomesala
-name
-data
-ora</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="503" parent="170">
-      <ColNames>nomesala
-name
-data
-ora</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_biglietti_1</UnderlyingIndexName>
-    </key>
-    <column id="504" parent="171" name="nomefilm">
+    <column id="503" parent="171" name="nomefilm">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="505" parent="171" name="regista">
+    <column id="504" parent="171" name="regista">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="506" parent="171" name="genere">
+    <column id="505" parent="171" name="genere">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="507" parent="171" name="prezzo">
+    <column id="506" parent="171" name="prezzo">
       <Position>4</Position>
       <DataType>real|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="508" parent="171" name="sqlite_autoindex_films_1">
+    <index id="507" parent="171" name="sqlite_autoindex_films_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>nomefilm</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="509" parent="171">
+    <key id="508" parent="171">
       <ColNames>nomefilm</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_films_1</UnderlyingIndexName>
     </key>
-    <column id="510" parent="172" name="nomesala">
+    <column id="509" parent="172" name="nomesala">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="511" parent="172" name="orario">
+    <column id="510" parent="172" name="orario">
       <Position>2</Position>
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="512" parent="172" name="sqlite_autoindex_orari_1">
+    <index id="511" parent="172" name="sqlite_autoindex_orari_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>nomesala</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="513" parent="172">
+    <key id="512" parent="172">
       <ColNames>nomesala</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_orari_1</UnderlyingIndexName>
     </key>
-    <column id="514" parent="173" name="nomesala">
+    <column id="513" parent="173" name="nomesala">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="515" parent="173" name="nposti">
+    <column id="514" parent="173" name="nposti">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="516" parent="173" name="filmassegnato">
+    <column id="515" parent="173" name="filmassegnato">
       <Position>3</Position>
       <DataType>VARCHAR(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="517" parent="173" name="sqlite_autoindex_sale_1">
+    <index id="516" parent="173" name="sqlite_autoindex_sale_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>nomesala</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="518" parent="173">
+    <key id="517" parent="173">
       <ColNames>nomesala</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_sale_1</UnderlyingIndexName>
     </key>
-    <column id="519" parent="174" name="type">
+    <column id="518" parent="174" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="520" parent="174" name="name">
+    <column id="519" parent="174" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="521" parent="174" name="tbl_name">
+    <column id="520" parent="174" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="522" parent="174" name="rootpage">
+    <column id="521" parent="174" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="523" parent="174" name="sql">
+    <column id="522" parent="174" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="524" parent="175" name="email">
+    <column id="523" parent="175" name="email">
       <Position>1</Position>
       <DataType>varchar(50)|0s</DataType>
     </column>
-    <column id="525" parent="175" name="name">
+    <column id="524" parent="175" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="526" parent="175" name="password">
+    <column id="525" parent="175" name="password">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="527" parent="175" name="date">
+    <column id="526" parent="175" name="date">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="528" parent="175" name="sqlite_autoindex_users_1">
+    <index id="527" parent="175" name="sqlite_autoindex_users_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>email</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="529" parent="175">
+    <key id="528" parent="175">
       <ColNames>email</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_users_1</UnderlyingIndexName>

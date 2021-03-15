@@ -16,11 +16,12 @@ public class Test {
         //manager.execute(new ReportSala("A1","giornaliero"));
 
         //biglietti
-        String date = "2021-03-20";
-        String time = "18:00";
+        String date = "2021-05-22";
+        String time = "15:00";
         manager.execute(new AcquistaBiglietto("A1","pio","User03",
-                LocalDateTime.of(LocalDate.parse(date), LocalTime.parse(time)),true,30.0f));
-        //manager.undo(); //do not work
+                LocalDateTime.of(LocalDate.parse(date), LocalTime.parse(time)),LocalDateTime.now(),true,30.0f));
+        manager.execute(new CartaDiCredito("2197201720170","Gennaro","23/32","345"));
+        manager.undo();
 
     }
 }
