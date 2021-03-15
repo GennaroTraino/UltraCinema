@@ -7,6 +7,7 @@ Technologies used for the project:
 - Java 8
 - JavaFX API version 15.0.1
 - SQLite Database
+- FXML files
 
 In this project I used 3 Design Pattern of the GoF:
 - Command Pattern: due to managment of the main command of the Admins and the Users.
