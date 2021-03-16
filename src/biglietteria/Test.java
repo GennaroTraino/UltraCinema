@@ -1,5 +1,7 @@
 package biglietteria;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -20,8 +22,15 @@ public class Test {
         String time = "15:00";
         manager.execute(new AcquistaBiglietto("A1","pio","User03",
                 LocalDateTime.of(LocalDate.parse(date), LocalTime.parse(time)),LocalDateTime.now(),true,30.0f));
-        manager.execute(new CartaDiCredito("2197201720170","Gennaro","23/32","345"));
-        manager.undo();
-
+        //manager.execute(new CartaDiCredito("2197201720170","Gennaro","23/32","345"));
+        //manager.undo();
+/**        DBConnection db = null;
+        try {
+            db = DBConnection.getInstance();
+            System.out.println(db.getFilmPrice("pio"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+ */
     }
 }

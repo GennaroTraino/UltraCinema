@@ -10,17 +10,14 @@ public class Contanti implements Pagamento {
 
     @Override
     public void execute() {
-        System.out.println("INSERIRE L'IMPORTO ...");
         this.paga();
     }
 
     @Override
     public void undo() {
-        System.out.println("RIMBORSO: CONTANTI EROGATI ");
     }
 
     @Override
     public void paga() {
-        System.out.println("PAGAMENTO EFFETTUATO, BUONA VISIONE");
     }
 }

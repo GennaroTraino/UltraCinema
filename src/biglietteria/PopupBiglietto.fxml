@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Pane" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PopupBigliettoController">
+   <children>
+      <ImageView fx:id="logoImage" fitHeight="109.0" fitWidth="166.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Label fx:id="usernameLabel" layoutX="246.0" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="Gennaro Traino" textFill="#273237" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="23.0">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="filmLabel" layoutX="246.0" layoutY="62.0" prefHeight="25.0" prefWidth="188.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="Film" textFill="#273237" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="62.0">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="salaLabel" layoutX="465.0" layoutY="62.0" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="SALA: A1" textFill="#273237" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="62.0">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="dataLabel" layoutX="388.0" layoutY="135.0" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="DATA" textFill="#273237" AnchorPane.bottomAnchor="57.80000000000001" AnchorPane.rightAnchor="46.0">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="oraLabel" layoutX="388.0" layoutY="176.0" prefHeight="25.0" prefWidth="166.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="ORA" textFill="#273237" AnchorPane.bottomAnchor="16.80000000000001" AnchorPane.rightAnchor="46.0">
+         <font>
+            <Font name="Dubai Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="tipoBigliettoLabel" alignment="CENTER" layoutX="14.0" layoutY="148.0" prefHeight="38.0" prefWidth="188.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="RIDOTTO" textFill="#273237" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font name="Dubai Bold" size="31.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

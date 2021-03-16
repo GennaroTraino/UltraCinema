@@ -30,7 +30,7 @@ public class LoginController {
     Label errorLabel;
 
     //Variabili
-    private Login login = new Login();
+    private final Login login = new Login();
     private User user = new User();
 
     /**
@@ -47,10 +47,21 @@ public class LoginController {
         user.setPassword(password);
 
         if (!(email.equals("")) && !(password.equals(""))) {
-            if (login.checkLogin(user)) {
 
-                //TODO controllare se utente è admin
-                ((Node)actionEvent.getSource()).getScene().getWindow().hide();
+            if (login.checkLoginAdmin(user)) {
+                ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+                Stage primaryStage = new Stage();
+                primaryStage.setTitle("ADMIN CONTROL PANEL");
+                FXMLLoader loader = new FXMLLoader();
+                Pane root = loader.load(getClass().getResource("PrincipaleAdmin.fxml").openStream());
+                AdminController ad = loader.getController();
+                //user = login.getData(user);
+                Scene scene = new Scene(root, 854, 480);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }
+            if (login.checkLogin(user)) {
+                ((Node) actionEvent.getSource()).getScene().getWindow().hide();
                 Stage primaryStage = new Stage();
                 primaryStage.setTitle("HOME PAGE");
                 FXMLLoader loader = new FXMLLoader();
@@ -59,15 +70,17 @@ public class LoginController {
 
                 //preleva i dati dell'utente completi prima di entrare
                 user = login.getData(user);
-                pc.getUser(user.getNome(), user.getEmail());
-                Scene scene = new Scene(root,700,425);
+                pc.getUser(user);
+                Scene scene = new Scene(root, 854, 480);
                 primaryStage.setScene(scene);
                 primaryStage.show();
             } else {
                 errorLabel.setText("Errore: username e password errati");
             }
         }
-        else{ errorLabel.setText("Errore: spazi vuoti"); }
+        else {
+            errorLabel.setText("Errore: spazi vuoti");
+        }
     }
 
     public void registerButtonPressed(ActionEvent actionEvent) {

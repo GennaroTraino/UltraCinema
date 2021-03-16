@@ -4,20 +4,14 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="biglietteria.PrincipaleController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PrincipaleController">
    <children>
-      <ComboBox fx:id="comboBoxFilm" layoutX="472.0" layoutY="105.0" onMouseDragEntered="#filmSelected" prefWidth="150.0" promptText="Seleziona un Film" style="-fx-background-color: #ffffff; -fx-border-radius: 0.2;" />
-      <ComboBox fx:id="comboBoxOrari" layoutX="472.0" layoutY="140.0" onMouseDragEntered="#timeSelected" prefHeight="25.0" prefWidth="81.0" promptText="Ora" style="-fx-background-color: #ffffff; -fx-border-radius: 0.2;" />
-      <Label layoutX="14.0" layoutY="14.0" text="ULTRA CINEMA" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
-         <font>
-            <Font name="Dubai Bold" size="32.0" />
-         </font>
-      </Label>
-      <Label fx:id="usernameLabel" layoutX="646.0" layoutY="30.0" text="USERNAME01" textFill="WHITE" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="30.0">
+      <Label fx:id="usernameLabel" layoutX="646.0" layoutY="30.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="USERNAME01" textFill="#273237" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font name="Dubai Bold" size="14.0" />
          </font>
@@ -27,15 +21,32 @@
             <Font name="Dubai Regular" size="12.0" />
          </font>
       </Button>
-      <VBox layoutX="125.0" layoutY="105.0" prefHeight="302.0" prefWidth="277.0" style="-fx-background-color: #ffffff;">
+      <VBox layoutX="245.0" layoutY="69.0" prefHeight="259.0" prefWidth="363.0" style="-fx-background-color: #ffffff; -fx-background-radius: 11;" AnchorPane.leftAnchor="245.00000000000006" AnchorPane.rightAnchor="245.8" AnchorPane.topAnchor="69.0">
          <children>
-            <Label alignment="CENTER" prefHeight="32.0" prefWidth="284.0" text="Lista Film In Proiezione" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="32.0" prefWidth="372.0" style="-fx-background-radius: 5; -fx-border-color: #263238; -fx-background-color: #fff951;" text="Lista Film In Proiezione" textAlignment="CENTER">
                <font>
                   <Font name="Dubai Bold" size="18.0" />
                </font>
             </Label>
-            <ListView fx:id="movieList" onMouseClicked="#filmSelected" prefHeight="480.0" prefWidth="854.0" />
+            <ListView fx:id="movieList" onMouseClicked="#filmSelected" prefHeight="480.0" prefWidth="854.0" style="-fx-background-radius: 10;" />
+            <ComboBox fx:id="comboBoxOrari" onContextMenuRequested="#filmSelected" prefHeight="25.0" prefWidth="374.0" promptText="Ora" style="-fx-background-color: #fff951; -fx-background-radius: 5;" />
          </children>
       </VBox>
+      <ImageView fx:id="logoImage" fitHeight="110.0" fitWidth="142.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Button fx:id="creditCard" layoutX="169.0" layoutY="380.0" mnemonicParsing="false" onAction="#creditCardPay" prefHeight="54.0" prefWidth="151.0" style="-fx-background-color: #fff951;" text="CARTA">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="bancomat" layoutX="350.0" layoutY="380.0" mnemonicParsing="false" onAction="#bancomatPay" prefHeight="54.0" prefWidth="151.0" style="-fx-background-color: #fff951;" text="BANCOMAT">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="contanti" layoutX="532.0" layoutY="380.0" mnemonicParsing="false" onAction="#contantiPay" prefHeight="54.0" prefWidth="151.0" style="-fx-background-color: #fff951;" text="CONTANTI">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

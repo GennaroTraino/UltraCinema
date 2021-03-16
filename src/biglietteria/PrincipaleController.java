@@ -13,11 +13,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseDragEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PrincipaleController implements Initializable {
@@ -30,14 +36,21 @@ public class PrincipaleController implements Initializable {
     Label usernameLabel;
     @FXML
     ListView<String> movieList;
+    @FXML
+    private ImageView logoImage;
 
     //Variabili
     private User user = new User();
     ObservableList list = FXCollections.observableArrayList();
+    String movieName = null;
+    Float prezzoFilm = 0.0f;
+    String nomeSala = null;
+    LocalDateTime dataeOra = null;
+
 
     public void loadData() {
         list.removeAll(list);
-        String a = "Harry Potter";
+        String a = "pio";
         String b = "Hit";
         String c = "Avatar";
         movieList.getItems().addAll(a,b,c);
@@ -46,13 +59,13 @@ public class PrincipaleController implements Initializable {
 
     /**
      * Metodo finalizzato a ricevere dal LoginForm l'username dell'utente che ha
-     * effettuato l'accesso
-     * @param username utente che ha effettuato l'acceso
+     * effettuato l' accesso
+     * @param user utente che ha effettuato l'acceso
      */
-    void getUser(String username,String email) throws SQLException {
-        this.user.setNome(username);
-        this.user.setEmail(email);
-        usernameLabel.setText(username);
+    void getUser(User user) {
+        this.user = user;
+        usernameLabel.setText(user.getNome());
+        logoImage.setImage(new Image("biglietteria\\Logo.png"));
     }
 
 
@@ -76,20 +89,84 @@ public class PrincipaleController implements Initializable {
     }
 
     /**
-     * Metodo che salva la stringa quando viene scelto il film dal comboBoxFilm.
-     * E Genera la scelta degli orari di proiezione sul comboBoxOrari
+     * Metodo che salva la stringa quando viene scelto il film dalla listaFilm.
+     * Genera la scelta degli orari di proiezione sul comboBoxOrari
+     * Ricava la prima sala libera dove il film è in proiezione
      */
-    public void filmSelected(MouseDragEvent mouseDragEvent) {
-        String movie = movieList.getSelectionModel().getSelectedItem();
-        if (movie == null) {
-            //TODO
+    public void filmSelected() throws SQLException {
+        movieName = movieList.getSelectionModel().getSelectedItem();
+        if (movieName != null) {
+            DBConnection db = DBConnection.getInstance();
+            ArrayList<LocalDateTime> list = db.getDataTimeFilm(movieName);
+            prezzoFilm = db.getFilmPrice(movieName);
+            nomeSala = db.getSalaFilm(movieName);
+
+
+            list.sort(LocalDateTime::compareTo);
+            comboBoxOrari.getItems().removeAll();
+            comboBoxOrari.getItems().addAll(list);
+        }
+
+    }
+
+
+
+    public void creditCardPay(ActionEvent actionEvent) {
+        dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
+
+        try {
+            ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("PAY WINDOW");
+            FXMLLoader loader = new FXMLLoader();
+            Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
+            PagamentoController pag = loader.getController();
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"carta");
+            Scene scene = new Scene(root, 854, 480);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    /**
-     * Metodo che salva l'orario di proiezione scelto
-     */
-    public void timeSelected(MouseDragEvent mouseDragEvent) {
+
+    public void bancomatPay(ActionEvent actionEvent) {
+        dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
+
+        try {
+            ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("PAY WINDOW");
+            FXMLLoader loader = new FXMLLoader();
+            Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
+            PagamentoController pag = loader.getController();
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"bancomat");
+            Scene scene = new Scene(root, 854, 480);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void contantiPay(ActionEvent actionEvent) {
+        dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
+
+        try {
+            ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("PAY WINDOW");
+            FXMLLoader loader = new FXMLLoader();
+            Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
+            PagamentoController pag = loader.getController();
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"contanti");
+            Scene scene = new Scene(root, 854, 480);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -101,5 +178,4 @@ public class PrincipaleController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         loadData();
     }
-
 }

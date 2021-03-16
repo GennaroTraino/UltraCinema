@@ -84,4 +84,12 @@ public class Login {
         }
         return user;
     }
+
+    public boolean checkLoginAdmin(User user) throws SQLException {
+
+        if(user.getEmail().toUpperCase().equals("ADMIN") && user.getPassword().equals("admin")) {
+            return true;
+        }
+        return false;
+    }
 }
