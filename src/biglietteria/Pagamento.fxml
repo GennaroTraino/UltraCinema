@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PagamentoController">
-   <children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="biglietteria.PagamentoController">
       <Label fx:id="usernameLabel" layoutX="498.0" layoutY="14.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="USERNAME01" textFill="#273237" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Dubai Bold" size="14.0" />
@@ -17,7 +16,7 @@
             <Font name="Dubai Bold" size="23.0" />
          </font>
       </Label>
-      <Button fx:id="payButton" layoutX="206.0" layoutY="254.0" mnemonicParsing="false" onAction="#creditCardPay" prefHeight="54.0" prefWidth="183.0" style="-fx-background-color: #ffffff;" text="Paga" AnchorPane.bottomAnchor="111.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="210.8">
+      <Button fx:id="payButton" layoutX="206.0" layoutY="254.0" mnemonicParsing="false" onAction="#Pay" prefHeight="54.0" prefWidth="183.0" style="-fx-background-color: #ffffff;" text="Paga" AnchorPane.bottomAnchor="111.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="210.8">
          <font>
             <Font name="Dubai Bold" size="18.0" />
          </font>
@@ -27,10 +26,9 @@
             <Font name="Dubai Regular" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="homeButton" layoutX="14.0" layoutY="364.0" mnemonicParsing="false" onAction="#homeBack" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #ffffff;" text="&lt;I Home">
+      <Button layoutX="14.0" layoutY="364.0" mnemonicParsing="false" onAction="#homeBack" prefHeight="41.0" prefWidth="121.0" style="-fx-background-color: #ffffff;" text="&lt;I Home">
          <font>
             <Font name="Dubai Bold" size="18.0" />
          </font>
       </Button>
-   </children>
 </AnchorPane>

@@ -4,11 +4,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.TextField?>
 <AnchorPane prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.AdminController">
    <children>
       <Label layoutX="320.0" layoutY="23.0" prefHeight="35.0" prefWidth="215.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="ADMIN CONTROL PANEL" textFill="#263238" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="23.0">
@@ -23,13 +23,12 @@
                   <Font name="Dubai Bold" size="18.0" />
                </font>
             </Label>
-            <ListView fx:id="listaFilm" prefHeight="252.0" prefWidth="340.0" />
+            <ListView fx:id="listaFilm" onMouseClicked="#filmSelected" prefHeight="252.0" prefWidth="340.0" />
          </children>
       </VBox>
       <ComboBox fx:id="salaBox" layoutX="352.0" layoutY="156.0" prefWidth="150.0" promptText="Assegna Alla Sala" style="-fx-background-color: #ffffff;" />
-      <ComboBox fx:id="oraBox" layoutX="352.0" layoutY="192.0" prefWidth="150.0" promptText="Orario Di Proiezione" style="-fx-background-color: #ffffff;" />
       <TextField fx:id="prezzoText" layoutX="353.0" layoutY="265.0" />
-      <Button fx:id="saveButton" layoutX="356.0" layoutY="303.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="142.0" style="-fx-background-color: #fff951;" text="Save Changes">
+      <Button fx:id="saveButton" layoutX="356.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#saveButtonPressed" prefHeight="54.0" prefWidth="142.0" style="-fx-background-color: #fff951;" text="Save Changes">
          <font>
             <Font name="Dubai Bold" size="18.0" />
          </font>
@@ -44,7 +43,7 @@
             <Font name="Dubai Regular" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="reportButton" layoutX="628.0" layoutY="303.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="142.0" style="-fx-background-color: #fff951;" text="Genera Report">
+      <Button fx:id="reportButton" layoutX="628.0" layoutY="303.0" mnemonicParsing="false" onAction="#reportPressed" prefHeight="54.0" prefWidth="142.0" style="-fx-background-color: #fff951;" text="Genera Report">
          <font>
             <Font name="Dubai Bold" size="18.0" />
          </font>
@@ -66,5 +65,11 @@
             <Font name="Dubai Regular" size="16.0" />
          </font>
       </Label>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="275.0" layoutY="409.0" prefHeight="35.0" prefWidth="306.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" textFill="#263238" AnchorPane.bottomAnchor="35.80000000000001">
+         <font>
+            <Font name="Dubai Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="770.0" layoutY="28.0" mnemonicParsing="false" onAction="#exitPressed" prefHeight="29.0" prefWidth="64.0" style="-fx-background-color: #ffffff;" text="EXIT" />
    </children>
 </AnchorPane>

@@ -32,8 +32,9 @@ public class AcquistaBiglietto implements CommandUser{
     }
 
     @Override
-    public void undo() {
+    public boolean undo() {
         operationReceiver = new OperationReceiver();
         operationReceiver.undoBiglietto(nomeSala,name,dataOra,dataOraAcquisto);
+        return true;
     }
 }

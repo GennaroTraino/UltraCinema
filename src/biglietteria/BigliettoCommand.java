@@ -12,7 +12,7 @@ public class BigliettoCommand implements CommandUser {
     }
 
     @Override
-    public void undo() {
-
+    public boolean undo() {
+        return true;
     }
 }

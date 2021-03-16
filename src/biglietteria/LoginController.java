@@ -30,8 +30,10 @@ public class LoginController {
     Label errorLabel;
 
     //Variabili
+
     private final Login login = new Login();
     private User user = new User();
+    CommandManager manager = CommandManager.getInstance();
 
     /**
      * Metodo Login, si attiva quando viene premuto il puslante Login
@@ -70,7 +72,7 @@ public class LoginController {
 
                 //preleva i dati dell'utente completi prima di entrare
                 user = login.getData(user);
-                pc.getUser(user);
+                pc.getUser(user, manager);
                 Scene scene = new Scene(root, 854, 480);
                 primaryStage.setScene(scene);
                 primaryStage.show();

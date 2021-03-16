@@ -14,7 +14,8 @@ public class Contanti implements Pagamento {
     }
 
     @Override
-    public void undo() {
+    public boolean undo() {
+        return true;
     }
 
     @Override

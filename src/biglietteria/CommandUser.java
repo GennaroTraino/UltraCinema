@@ -5,5 +5,5 @@ package biglietteria;
  */
 public interface CommandUser {
         public void execute();
-        public void undo();
+        public boolean undo();
 }

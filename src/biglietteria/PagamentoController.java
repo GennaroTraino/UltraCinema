@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -32,14 +31,13 @@ public class PagamentoController {
     LocalDateTime dataeOra;
     boolean intero = true;
     private String tipo;
+    CommandManager manager;
 
     @FXML
-    void creditCardPay(ActionEvent event) {
+    void Pay() {
         paymentLabel.setText("PAGAMENTO IN CORSO...");
-        CommandManager manager = CommandManager.getInstance();
         manager.execute(new AcquistaBiglietto(nomeSala, nomeFilm, user.getNome(),
                 dataeOra, LocalDateTime.now(), intero, 30.0f));
-        double random_double = Math.random() * (999999999999d - 0d + 1) + 0;
 
         switch (tipo) {
             case "carta":
@@ -72,18 +70,19 @@ public class PagamentoController {
     }
 
 
-    public void getData(User user, String nomeFilm, String nomeSala, Float prezzoFilm, LocalDateTime dataeOra,String tipo) {
+    public void getData(User user, String nomeFilm, String nomeSala, Float prezzoFilm, LocalDateTime dataeOra,String tipo,CommandManager manager) {
         this.user = user;
         this.nomeFilm = nomeFilm;
         this.nomeSala = nomeSala;
         this.prezzoFilm = prezzoFilm;
         this.dataeOra = dataeOra;
         this.tipo = tipo;
+        this.manager = manager;
 
         usernameLabel.setText(user.getNome());
         priceLabel.setText("EURO: " + prezzoFilm.toString());
 
-        DayOfWeek giorno = LocalDate.now().getDayOfWeek();
+        String giorno = LocalDate.now().getDayOfWeek().toString();
         if(giorno.equals("SATURDAY") || giorno.equals("SUNDAY")){
             this.prezzoFilm += (prezzoFilm/100)*50;
         } else
@@ -115,8 +114,8 @@ public class PagamentoController {
             FXMLLoader loader = new FXMLLoader();
             Pane root = loader.load(getClass().getResource("Principale.fxml").openStream());
             PrincipaleController pc = loader.getController();
-            pc.getUser(user);
-            Scene scene = new Scene(root, 600, 400);
+            pc.getUser(user,manager);
+            Scene scene = new Scene(root, 854, 480);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {

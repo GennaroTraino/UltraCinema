@@ -18,8 +18,9 @@ public class CartaDiCredito implements Pagamento {
     }
 
     @Override
-    public void undo() {
+    public boolean undo() {
         System.out.println("RIMBORSO SU CARTA EFFETTUATO");
+        return true;
     }
 
     @Override

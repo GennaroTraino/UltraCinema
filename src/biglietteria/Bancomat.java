@@ -17,8 +17,9 @@ public class Bancomat implements Pagamento {
     }
 
     @Override
-    public void undo() {
+    public boolean undo() {
         System.out.println("RIMBORSO SU BANCOMAT EFFETTUATO");
+        return true;
     }
 
     @Override

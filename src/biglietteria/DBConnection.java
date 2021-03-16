@@ -303,4 +303,30 @@ public class DBConnection {
         }
         return null;
     }
+
+    public ArrayList<String> getListaNomiFilm() throws SQLException{
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            String query = "SELECT * FROM ((sale LEFT OUTER JOIN films ON sale.filmassegnato = films.nomefilm))";
+            connection = connect();
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            //Eseguo la query di vista e tengo il risultato in un oggetto ResultSet
+            ResultSet rs = ps.executeQuery();
+            ArrayList<String> lista = new ArrayList<String>();
+            while(rs.next()) {
+                lista.add(rs.getString("nomefilm"));
+            }
+            return lista;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Chiusura Oggetti Connessione e Statement
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+        return null;
+    }
 }

@@ -1,7 +1,5 @@
 package biglietteria;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,11 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,7 +25,7 @@ import java.util.ResourceBundle;
 public class PrincipaleController implements Initializable {
 
     @FXML
-    ComboBox comboBoxOrari;
+    private ComboBox comboBoxOrari;
     @FXML
     Button logoutButton;
     @FXML
@@ -38,40 +34,35 @@ public class PrincipaleController implements Initializable {
     ListView<String> movieList;
     @FXML
     private ImageView logoImage;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private Button refundButton;
 
     //Variabili
+    CommandManager manager;
     private User user = new User();
-    ObservableList list = FXCollections.observableArrayList();
     String movieName = null;
     Float prezzoFilm = 0.0f;
     String nomeSala = null;
     LocalDateTime dataeOra = null;
 
-
-    public void loadData() {
-        list.removeAll(list);
-        String a = "pio";
-        String b = "Hit";
-        String c = "Avatar";
-        movieList.getItems().addAll(a,b,c);
-    }
-
-
     /**
      * Metodo finalizzato a ricevere dal LoginForm l'username dell'utente che ha
      * effettuato l' accesso
      * @param user utente che ha effettuato l'acceso
+     * @param manager
      */
-    void getUser(User user) {
+    void getUser(User user, CommandManager manager) {
         this.user = user;
+        this.manager = manager;
         usernameLabel.setText(user.getNome());
         logoImage.setImage(new Image("biglietteria\\Logo.png"));
     }
 
-
     /**
      * Metodo per effettuare il logout alla pressione del tasto logout in home page
-     * @param actionEvent
+     * @param actionEvent parametro per aprire nuove finestre
      */
     public void logoutButtonPressed(ActionEvent actionEvent) {
         try {
@@ -109,9 +100,15 @@ public class PrincipaleController implements Initializable {
 
     }
 
-
-
+    /**
+     * Metodo invocato quando viene premuto il pulsante per pagare con carta di credito
+     * @param actionEvent parametro per aprire nuove finestre
+     */
     public void creditCardPay(ActionEvent actionEvent) {
+        if(movieName == null) {
+            errorLabel.setText("ERRORE: SELEZIONA UN ORARIO ED UNA DATA");
+            return;
+        }
         dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
 
         try {
@@ -121,7 +118,7 @@ public class PrincipaleController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
             PagamentoController pag = loader.getController();
-            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"carta");
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"carta",manager);
             Scene scene = new Scene(root, 854, 480);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -130,8 +127,15 @@ public class PrincipaleController implements Initializable {
         }
     }
 
-
+    /**
+     * Metodo invocato quando viene premuto il pulsante per pagare con bancomat
+     * @param actionEvent parametro per aprire nuove finestre
+     */
     public void bancomatPay(ActionEvent actionEvent) {
+        if(movieName == null) {
+            errorLabel.setText("ERRORE: SELEZIONA UN ORARIO ED UNA DATA");
+            return;
+        }
         dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
 
         try {
@@ -141,7 +145,7 @@ public class PrincipaleController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
             PagamentoController pag = loader.getController();
-            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"bancomat");
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"bancomat",manager);
             Scene scene = new Scene(root, 854, 480);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -150,7 +154,15 @@ public class PrincipaleController implements Initializable {
         }
     }
 
+    /**
+     * Metodo invocato quando viene premuto il pulsante per pagare in contanti
+     * @param actionEvent parametro per aprire nuove finestre
+     */
     public void contantiPay(ActionEvent actionEvent) {
+        if(movieName == null) {
+            errorLabel.setText("ERRORE: SELEZIONA UN ORARIO ED UNA DATA");
+            return;
+        }
         dataeOra = LocalDateTime.parse(comboBoxOrari.getSelectionModel().getSelectedItem().toString());
 
         try {
@@ -160,7 +172,7 @@ public class PrincipaleController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             Pane root = loader.load(getClass().getResource("Pagamento.fxml").openStream());
             PagamentoController pag = loader.getController();
-            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"contanti");
+            pag.getData(user,movieName,nomeSala,prezzoFilm,dataeOra,"contanti",manager);
             Scene scene = new Scene(root, 854, 480);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -176,6 +188,25 @@ public class PrincipaleController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadData();
+        CommandManager manager = CommandManager.getInstance();
+        refundButton.setVisible(true);
+
+        try {
+            DBConnection db = DBConnection.getInstance();
+            ArrayList<String> lista = db.getListaNomiFilm();
+            movieList.getItems().addAll(lista);
+        } catch (SQLException e) {
+            errorLabel.setText("ERRORE: IMPOSSIBILE CONTATTARE IL DATABASE");
+            e.printStackTrace();
+        }
+    }
+
+    public void Refund(ActionEvent actionEvent) {
+        if(manager.undo()) {
+            errorLabel.setText("BIGLIETTO ANNULLATO, RIMBORSO EFFETTUATO!!!");
+            refundButton.setVisible(false);
+        } else {
+            errorLabel.setText("NESSUN RIMBORSO POSSIBILE");
+        }
     }
 }

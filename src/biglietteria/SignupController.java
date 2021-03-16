@@ -10,16 +10,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.ImageView;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class SignupController {
     @FXML
@@ -36,6 +31,7 @@ public class SignupController {
     //Variabili
     private Signup signup = new Signup();
     private User user = new User();
+    CommandManager manager = CommandManager.getInstance();
 
     /**
      * Metodo per registrare utente nel database
@@ -64,7 +60,7 @@ public class SignupController {
                 FXMLLoader loader = new FXMLLoader();
                 Pane root = loader.load(getClass().getResource("Principale.fxml").openStream());
                 PrincipaleController pc = loader.getController();
-                pc.getUser(user);
+                pc.getUser(user, manager);
                 Scene scene = new Scene(root,854,480);
                 primaryStage.setScene(scene);
                 primaryStage.show();

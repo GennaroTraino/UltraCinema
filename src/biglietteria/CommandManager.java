@@ -53,13 +53,20 @@ public class CommandManager {
      * PATTERN COMMAND: Metodo che permette l'undo delle operazioni
      * dell'utente sull'acquisto dei biglietti -
      * Vale esclusivamente per l'user
+     * @return
      */
-    void undo() {
+    public boolean undo() {
+
+
+        if (stackUser.isEmpty()) {
+            return false;
+        }
         stackUser.peek().undo();
         stackUser.pop();
 
         stackPagamento.peek().undo();
         stackPagamento.pop();
+        return true;
     }
 
 
