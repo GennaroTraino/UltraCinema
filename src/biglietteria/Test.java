@@ -20,8 +20,14 @@ public class Test {
         //biglietti
         String date = "2021-05-22";
         String time = "15:00";
-        manager.execute(new AcquistaBiglietto("A1","pio","User03",
-                LocalDateTime.of(LocalDate.parse(date), LocalTime.parse(time)),LocalDateTime.now(),true,30.0f));
+        try {
+            manager.execute(new AcquistaBiglietto("A1","pio","User03",
+                    LocalDateTime.of(LocalDate.parse(date), LocalTime.parse(time)),LocalDateTime.now(),true,30.0f));
+        } catch (PostiException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //manager.execute(new CartaDiCredito("2197201720170","Gennaro","23/32","345"));
         //manager.undo();
 /**        DBConnection db = null;

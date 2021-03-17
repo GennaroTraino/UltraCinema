@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
  */
 
 public class Biglietto {
-    private User utente;
-    private boolean intero;
-    private Sala sala;
-    private Film film;
-    private float prezzo;
-    private LocalDateTime dataeora;
+    private final User utente;
+    private final boolean intero;
+    private final Sala sala;
+    private final Film film;
+    private final float prezzo;
+    private final LocalDateTime dataeora;
 
     /**
      * Costruttore completo Biglietto

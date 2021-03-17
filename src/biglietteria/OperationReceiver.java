@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * COMMAND PATTERN: RECEIVER Class.
@@ -251,49 +250,53 @@ public class OperationReceiver {
      * l'operazione di acquisto di un biglietto da parte di un user.
      * Richiamabile Da User tramite CommandUser
      */
-    //TODO da fare tutta
     public void acquistaBiglietto(String nomeSala, String nomeFilm, String name, LocalDateTime dataOra,
-                                  LocalDateTime dataoraacquisto, boolean intero, Float prezzo) {
+                                  LocalDateTime dataoraacquisto, boolean intero, Float prezzo) throws PostiException,SQLException {
 
-        Connection connection = null;
-        PreparedStatement preparedStatement=null;
-        try{
-            // Query
-            String query = "INSERT INTO biglietti(nomesala,nomefilm,name,data,ora,dataoraacquisto,intero,prezzo) VALUES(?,?,?,?,?,?,?,?)";
-            // Connessione
-            connection = DBConnection.connect();
-            // Creazione Statement
-            preparedStatement = connection.prepareStatement(query);
-            // Inserimento stringa
-            preparedStatement.setString (1,nomeSala);
-            preparedStatement.setString(2,nomeFilm);
-            preparedStatement.setString(3,name);
-            preparedStatement.setString(4,dataOra.toLocalDate().toString());
-            preparedStatement.setString(5,dataOra.toLocalTime().toString());
-            preparedStatement.setString(6,dataoraacquisto.toString());
-            preparedStatement.setBoolean(7,intero);
-            preparedStatement.setFloat(8,prezzo);
+        Connection connection;
+        PreparedStatement preparedStatement;
+        PreparedStatement psQuery;
+        // Connessione
+        connection = DBConnection.connect();
+        //Query Per sapere i posti occupati in sala
+        String query = "SELECT * FROM biglietti LEFT OUTER JOIN sale ON biglietti.nomesala = sale.nomesala " +
+                "where biglietti.nomesala = ? AND biglietti.nomefilm = ? AND biglietti.data = ? AND biglietti.ora = ?";
+        psQuery = connection.prepareStatement(query);
+        psQuery.setString(1,nomeSala);
+        psQuery.setString(2,nomeFilm);
+        psQuery.setString(3,dataOra.toLocalDate().toString());
+        psQuery.setString(4,dataOra.toLocalTime().toString());
+        ResultSet rs = psQuery.executeQuery();
+        int postiOccupati = 0;
+        int posti = 0;
 
-            // Esecuzione query
-            preparedStatement.executeUpdate();
-        }catch (Exception e){
-        }finally {
-            // Chiusura oggetti
-            if(connection!=null) {
-                try {
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-            if(preparedStatement!=null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
+        while (rs.next()){
+            postiOccupati++;
+            posti = rs.getInt("nposti");
         }
+
+        if(posti <= postiOccupati && posti != 0) throw new PostiException();
+
+        // Operazione di inserimento biglietto nel db
+        String query2 = "INSERT INTO biglietti(nomesala,nomefilm,name,data,ora,dataoraacquisto,intero,prezzo) VALUES(?,?,?,?,?,?,?,?)";
+        // Creazione Statement
+        preparedStatement = connection.prepareStatement(query2);
+        // Inserimento stringa
+        preparedStatement.setString (1,nomeSala);
+        preparedStatement.setString(2,nomeFilm);
+        preparedStatement.setString(3,name);
+        preparedStatement.setString(4,dataOra.toLocalDate().toString());
+        preparedStatement.setString(5,dataOra.toLocalTime().toString());
+        preparedStatement.setString(6,dataoraacquisto.toString());
+        preparedStatement.setBoolean(7,intero);
+        preparedStatement.setFloat(8,prezzo);
+
+        // Esecuzione query
+        preparedStatement.executeUpdate();
+        // Chiusura oggetti
+        connection.close();
+        psQuery.close();
+        preparedStatement.close();
     }
 
     /**
@@ -301,7 +304,7 @@ public class OperationReceiver {
      * l'operazione di undo sull' acquisto di un biglietto da parte di un user.
      * Richiamabile Da User tramite CommandUser
      */
-    //TODO da fare tutta
+
     public void undoBiglietto(String nomeSala,String name,LocalDateTime dataOra, LocalDateTime dataOraAcquisto) {
         Connection connection = null;
         PreparedStatement preparedStatement=null;

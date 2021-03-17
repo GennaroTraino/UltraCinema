@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+
 public class PagamentoController {
 
     @FXML
@@ -36,25 +37,26 @@ public class PagamentoController {
     @FXML
     void Pay() {
         paymentLabel.setText("PAGAMENTO IN CORSO...");
-        manager.execute(new AcquistaBiglietto(nomeSala, nomeFilm, user.getNome(),
-                dataeOra, LocalDateTime.now(), intero, 30.0f));
-
-        switch (tipo) {
-            case "carta":
-                manager.execute(new CartaDiCredito("2197201720170",user.getNome(),"23/32","345"));
-                break;
-            case "bancomat":
-                manager.execute(new Bancomat("2197201720170",user.getNome(),"23/32","345"));
-                break;
-            case "contanti":
-                manager.execute(new Contanti(user.getNome()));
-                break;
-        }
-
-        paymentLabel.setText("PAGAMENTO COMPLETATO");
-        payButton.setVisible(false);
-        //Faccio comparire Popup con il biglietto
         try {
+            manager.execute(new AcquistaBiglietto(nomeSala, nomeFilm, user.getNome(),
+                    dataeOra, LocalDateTime.now(), intero, 30.0f));
+
+            switch (tipo) {
+                case "carta":
+                    manager.execute(new CartaDiCredito("2197201720170",user.getNome(),"23/32","345"));
+                    break;
+                case "bancomat":
+                    manager.execute(new Bancomat("2197201720170",user.getNome(),"23/32","345"));
+                    break;
+                case "contanti":
+                    manager.execute(new Contanti(user.getNome()));
+                    break;
+            }
+
+            paymentLabel.setText("PAGAMENTO COMPLETATO");
+            payButton.setVisible(false);
+            //Faccio comparire Popup con il biglietto
+
             Stage secondaryStage = new Stage();
             secondaryStage.setTitle("Popup");
             FXMLLoader loaderbiglietto = new FXMLLoader();
@@ -64,7 +66,13 @@ public class PagamentoController {
             Scene scene = new Scene(root, 600, 200);
             secondaryStage.setScene(scene);
             secondaryStage.show();
+
+        } catch (PostiException postiException) {
+            paymentLabel.setText("ERRORE: POSTI ESAURITI");
+            priceLabel.setVisible(false);
+            payButton.setVisible(false);
         } catch (Exception e) {
+            paymentLabel.setText("ERRORE: PROBLEMA CON IL PAGAMENTO");
             e.printStackTrace();
         }
     }

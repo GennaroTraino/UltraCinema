@@ -1,17 +1,18 @@
 package biglietteria;
 
+import java.sql.SQLException;
 import java.util.Stack;
 
 /**
  * PATTERN COMMAND: Classe Invoker del pattern.
- * Mantiente una coda di operazioni (definite in Command)
+ * Mantiene una coda di operazioni (definite in Command) per utente, admin e pagamenti.
  */
 public class CommandManager {
 
-    //
-    private Stack<CommandAdmin> stackAdmin = null;
-    private Stack<CommandUser> stackUser = null;
-    private Stack<Pagamento> stackPagamento = null;
+    //Instance e stack vari
+    private Stack<CommandAdmin> stackAdmin;
+    private Stack<CommandUser> stackUser;
+    private Stack<Pagamento> stackPagamento;
     private static CommandManager instance = null;
 
     //Singleton
@@ -41,7 +42,7 @@ public class CommandManager {
      * PATTERN COMMAND: metodo execute sui CommandUser
      * @param command
      */
-    void execute(CommandUser command){
+    void execute(CommandUser command) throws PostiException, SQLException {
         if(stackUser.empty()){
             stackUser.push(command);
         }
@@ -50,14 +51,12 @@ public class CommandManager {
     }
 
     /**
-     * PATTERN COMMAND: Metodo che permette l'undo delle operazioni
-     * dell'utente sull'acquisto dei biglietti -
-     * Vale esclusivamente per l'user
-     * @return
+     * PATTERN COMMAND: Metodo che permette undo delle operazioni
+     * utente su acquisto di biglietti -
+     * Vale esclusivamente per un user
+     * @return true o false se riuscita o meno
      */
     public boolean undo() {
-
-
         if (stackUser.isEmpty()) {
             return false;
         }
@@ -69,9 +68,7 @@ public class CommandManager {
         return true;
     }
 
-
-
-    void execute(Pagamento command) {
+    void execute(Pagamento command) throws PostiException, SQLException {
         if (stackPagamento.empty()) {
             stackPagamento.push(command);
         }
@@ -84,5 +81,16 @@ public class CommandManager {
      */
     void clear() {
         stackUser.clear();
+    }
+
+    /**
+     * Metodo per controllare se lo stack dell' user è vuoto
+     * @return true se vuoto, fals altrimenti
+     */
+    public boolean isStackUserEmpty() {
+        if(stackUser.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

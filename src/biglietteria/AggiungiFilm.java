@@ -1,8 +1,5 @@
 package biglietteria;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 /**
  * COMMAND PATTERN: CONCRETE COMMAND
  * Classe che definisce l'operazione di inserimento film nel db
@@ -11,8 +8,7 @@ import java.sql.SQLException;
 
 public class AggiungiFilm implements CommandAdmin {
 
-    private Film film;
-    private OperationReceiver receiver = null;
+    private final Film film;
 
     public AggiungiFilm(Film film) {
         this.film = film;
@@ -20,7 +16,7 @@ public class AggiungiFilm implements CommandAdmin {
 
     @Override
     public void execute() {
-        receiver = new OperationReceiver();
+        OperationReceiver receiver = new OperationReceiver();
         receiver.aggiungiFilm(film);
     }
 }

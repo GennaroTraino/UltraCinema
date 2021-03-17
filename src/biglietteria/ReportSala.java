@@ -2,7 +2,7 @@ package biglietteria;
 
 /**
  * COMMAND PATTERN: CONCRETE COMMAND
- * Classe che richiama l'operazione dell'Admin di richiesta report affluenza e
+ * Classe che richiama l'operazione Admin di richiesta report affluenza e
  * ricavi di una Sala in uno specifico periodo
  */
 

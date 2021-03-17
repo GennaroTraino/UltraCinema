@@ -1,9 +1,5 @@
 package biglietteria;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 /**
  * COMMAND PATTERN: CONCRETE COMMAND
  * Classe che definisce l'operazione di aggiornamento prezzo
@@ -12,9 +8,8 @@ import java.sql.SQLException;
 
 public class AggiornaPrezzoFilm implements CommandAdmin {
 
-    private String nomeFilm;
-    private float prezzoAggiornato;
-    private OperationReceiver receiver = null;
+    private final String nomeFilm;
+    private final float prezzoAggiornato;
 
 
     public AggiornaPrezzoFilm(String nomeFilm, Float prezzoAggiornato) {
@@ -24,7 +19,7 @@ public class AggiornaPrezzoFilm implements CommandAdmin {
 
     @Override
     public void execute() {
-        receiver = new OperationReceiver();
+        OperationReceiver receiver = new OperationReceiver();
         receiver.aggiornaPrezzoFilm(nomeFilm,prezzoAggiornato);
     }
 }

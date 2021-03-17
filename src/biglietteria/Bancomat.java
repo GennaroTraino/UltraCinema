@@ -1,5 +1,9 @@
 package biglietteria;
 
+/**
+ * PATTERN STRATEGY: operazione pagamento Bancomat
+ * PATTERN COMMAND: concrete command
+ */
 public class Bancomat implements Pagamento {
     String numero, nome, scadenza, cvv;
 

@@ -1,8 +1,5 @@
 package biglietteria;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * COMMAND PATTERN: CONCRETE COMMAND
@@ -12,9 +9,8 @@ import java.sql.SQLException;
 
 public class AggiornaFilmSala implements CommandAdmin {
 
-    private String nomeFilm;
-    private String nomeSala;
-    private OperationReceiver receiver = null;
+    private final String nomeFilm;
+    private final String nomeSala;
 
     public AggiornaFilmSala(String nomeFilm,String nomeSala) {
         this.nomeFilm = nomeFilm;
@@ -24,7 +20,7 @@ public class AggiornaFilmSala implements CommandAdmin {
 
     @Override
     public void execute() {
-        receiver = new OperationReceiver();
+        OperationReceiver receiver = new OperationReceiver();
         receiver.aggiornaFilmSala(nomeFilm,nomeSala);
     }
 }

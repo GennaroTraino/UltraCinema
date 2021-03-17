@@ -22,6 +22,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Classe controller per interfaccia grafica Principale.
+ * Gestisce tutti gli eventi grafici
+ */
 public class PrincipaleController implements Initializable {
 
     @FXML
@@ -48,8 +52,8 @@ public class PrincipaleController implements Initializable {
     LocalDateTime dataeOra = null;
 
     /**
-     * Metodo finalizzato a ricevere dal LoginForm l'username dell'utente che ha
-     * effettuato l' accesso
+     * Metodo finalizzato a ricevere dal LoginForm: username dell'utente che ha
+     * effettuato l' accesso e istanza del CommandManager
      * @param user utente che ha effettuato l'acceso
      * @param manager
      */
@@ -183,24 +187,32 @@ public class PrincipaleController implements Initializable {
 
     /**
      * Inizializzazione, utile per scaricare la lista dei film
+     * Metodo richiamabile implementando la classe Initializable
      * @param location
      * @param resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommandManager manager = CommandManager.getInstance();
+        if (manager.isStackUserEmpty()){
+            refundButton.setVisible(false);
+        }
         refundButton.setVisible(true);
 
         try {
             DBConnection db = DBConnection.getInstance();
             ArrayList<String> lista = db.getListaNomiFilm();
-            movieList.getItems().addAll(lista);
+            System.out.println(lista);
         } catch (SQLException e) {
             errorLabel.setText("ERRORE: IMPOSSIBILE CONTATTARE IL DATABASE");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Metodo richiamato per effettuare annullamento di un operazione, entro 10 minuti
+     * @param actionEvent
+     */
     public void Refund(ActionEvent actionEvent) {
         if(manager.undo()) {
             errorLabel.setText("BIGLIETTO ANNULLATO, RIMBORSO EFFETTUATO!!!");

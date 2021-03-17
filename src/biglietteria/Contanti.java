@@ -1,5 +1,9 @@
 package biglietteria;
 
+/**
+ * STRATEGY PATTERN: classe che implementa la strategia: pagamento con carta in contanti
+ * COMMAND PATTER: concrete command pagamento
+ */
 public class Contanti implements Pagamento {
 
     private final String nome;

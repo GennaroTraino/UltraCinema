@@ -7,8 +7,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
+ * Classe che si occupa di gestire connessione al database e operazioni di creazione tabelle
+ * e principali query:
  * Stabilisce una connessione con il database -
  * Crea e Popola le tabelle -
+ * Metodi per ricevere liste di elementi memorizzati nel DB
  * Usa Design Pattern Singleton al fine di avere una sola istanza
  */
 
@@ -21,8 +24,8 @@ public class DBConnection {
     }
 
     /**
-     * Metodo che consente la creazione e la connesione al database
-     * Il database utilizzato è l'sqlite
+     * Metodo che consente la creazione e la connessione al database
+     * Il database utilizzato è SQLite
      */
 
     public static Connection connect() throws SQLException {
@@ -30,8 +33,7 @@ public class DBConnection {
     }
 
     /**
-     * Metodo del Singleton che crea l'unica istanza del database
-     *
+     * Metodo del Singleton che crea un unica istanza del database
      * @return istanza unica del database
      * @throws SQLException può sollevare un eccezione SQL in caso di errori
      */
@@ -40,7 +42,6 @@ public class DBConnection {
             instance = new DBConnection();
         else if (connect().isClosed())
             instance = new DBConnection();
-
         return instance;
     }
 
@@ -48,7 +49,6 @@ public class DBConnection {
     /**
      * Metodo Creazione Tabella Degli Utenti Registrati
      * I campi obbligatori per ogni utente sono Nome, Email, Password e DatadiNascita
-     *
      * @throws SQLException, puo lanciare un eccezione nel caso di errore
      */
     void createDBUser() throws SQLException {
@@ -109,11 +109,10 @@ public class DBConnection {
         }
     }
 
-
     /**
      * Metodo Creazione Tabella Delle sale
-     * I campi obbligatori per film sono Nomesala, orario, nposti e filmassegnato.
-     * Nomesala e orario formano una chiave primaria
+     * I campi obbligatori per film sono nomeSala, orario, nposti e filmAssegnato.
+     * nomeSala e orario formano una chiave primaria
      *
      * @throws SQLException, puo lanciare un eccezione nel caso di errore
      */
@@ -173,7 +172,10 @@ public class DBConnection {
         }
     }
 
-
+    /**
+     * Metodo Creazione Tabella Dei Biglietti
+     * @throws SQLException, puo lanciare un eccezione nel caso di errore
+     */
     void createDBBiglietti() throws SQLException {
         //Oggetto per la connessione al DB e Statement per interrogarlo
         Connection connection = null;
@@ -204,7 +206,7 @@ public class DBConnection {
     }
 
     /**
-     * Metodo che ritorna gli orari di un film
+     * Metodo che ritorna gli orari di un film (parametro di input)
      *
      * @param nomeFilm il nome del film in questione
      * @return ritorna una lista di orari e data fino a 3 giorni dopo
@@ -213,8 +215,7 @@ public class DBConnection {
     public ArrayList<LocalDateTime> getDataTimeFilm(String nomeFilm) throws SQLException {
         //Oggetto per la connessione al DB e Statement per interrogarlo
         Connection connection = null;
-        Statement statement = null;
-        try {
+          try {
             String query = "SELECT * FROM ((films JOIN sale ON films.nomefilm = sale.filmassegnato)" +
                     "JOIN orari ON sale.nomesala = orari.nomesala) WHERE filmassegnato = ?";
             connection = connect();
@@ -237,7 +238,6 @@ public class DBConnection {
             e.printStackTrace();
         } finally {
             // Chiusura Oggetti Connessione e Statement
-            if (statement != null) statement.close();
             if (connection != null) connection.close();
         }
 
@@ -247,11 +247,10 @@ public class DBConnection {
     /**
      * Metodo che prende in input il nome di un film e restituisce il suo prezzo
      * @param movieName
-     * @return
+     * @return prezzo del film
      */
     public Float getFilmPrice(String movieName) throws SQLException {
         Connection connection = null;
-        Statement statement = null;
         try {
             String query = "SELECT * FROM ((films JOIN sale ON films.nomefilm = sale.filmassegnato)" +
                     "JOIN orari ON sale.nomesala = orari.nomesala) WHERE filmassegnato = ?";
@@ -267,7 +266,6 @@ public class DBConnection {
             e.printStackTrace();
         } finally {
             // Chiusura Oggetti Connessione e Statement
-            if (statement != null) statement.close();
             if (connection != null) connection.close();
         }
         return null;
@@ -282,7 +280,6 @@ public class DBConnection {
      */
     public String getSalaFilm(String movieName) throws SQLException {
         Connection connection = null;
-        Statement statement = null;
         try {
             String query = "SELECT * FROM ((films JOIN sale ON films.nomefilm = sale.filmassegnato)" +
                     "JOIN orari ON sale.nomesala = orari.nomesala) WHERE filmassegnato = ?";
@@ -298,15 +295,17 @@ public class DBConnection {
             e.printStackTrace();
         } finally {
             // Chiusura Oggetti Connessione e Statement
-            if (statement != null) statement.close();
             if (connection != null) connection.close();
         }
         return null;
     }
 
+    /**
+     * Metodo che ritorna una lista di nomi di tutti i film registrati nel db
+     * @return lista dei nomi dei film
+     */
     public ArrayList<String> getListaNomiFilm() throws SQLException{
         Connection connection = null;
-        Statement statement = null;
         try {
             String query = "SELECT * FROM ((sale LEFT OUTER JOIN films ON sale.filmassegnato = films.nomefilm))";
             connection = connect();
@@ -314,7 +313,7 @@ public class DBConnection {
 
             //Eseguo la query di vista e tengo il risultato in un oggetto ResultSet
             ResultSet rs = ps.executeQuery();
-            ArrayList<String> lista = new ArrayList<String>();
+            ArrayList<String> lista = new ArrayList<>();
             while(rs.next()) {
                 lista.add(rs.getString("nomefilm"));
             }
@@ -324,7 +323,6 @@ public class DBConnection {
             e.printStackTrace();
         } finally {
             // Chiusura Oggetti Connessione e Statement
-            if (statement != null) statement.close();
             if (connection != null) connection.close();
         }
         return null;

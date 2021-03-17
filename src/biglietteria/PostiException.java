@@ -5,14 +5,14 @@ package biglietteria;
  * di proiezione di una sala troppo vicino all'orario di proiezione precedente!
  */
 
-public class OrarioSalaException extends Exception {
+public class PostiException extends Exception {
 
-    public OrarioSalaException(){
-        super("La proiezione che vuoi programmare è troppo vicina alla proiezione precedente");
+    public PostiException(){
+        super("Posti Esauriti in tutte le sale");
     }
 
     @Override
     public String toString() {
-        return getMessage() + ": devono passare almeno tre ore!";
+        return getMessage() + "Scegli un altro giorno";
     }
 }

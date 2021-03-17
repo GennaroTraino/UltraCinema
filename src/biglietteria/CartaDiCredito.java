@@ -1,5 +1,9 @@
 package biglietteria;
 
+/**
+ * STRATEGY PATTERN: classe che implementa la strategia: pagamento con carta di credito
+ * COMMAND PATTER: concrete command pagamento
+ */
 public class CartaDiCredito implements Pagamento {
 
     String numero, nome, scadenza, cvv;

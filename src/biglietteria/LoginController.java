@@ -16,7 +16,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
+/**
+ * Classe controller per interfaccia Login (login.fxml)
+ * Gestisce gli eventi di login
+ */
 public class LoginController {
     @FXML
     TextField emailField;
@@ -36,7 +39,7 @@ public class LoginController {
     CommandManager manager = CommandManager.getInstance();
 
     /**
-     * Metodo Login, si attiva quando viene premuto il puslante Login
+     * Metodo Login, si attiva quando viene premuto il pulsante di Login
      * @param actionEvent avvia una nuova finestra utente Principale.FXML
      *             oppure admin ADMIN.FXML
      * @throws IOException lancia un eccezione nel caso si verifichino degli errori
@@ -56,8 +59,6 @@ public class LoginController {
                 primaryStage.setTitle("ADMIN CONTROL PANEL");
                 FXMLLoader loader = new FXMLLoader();
                 Pane root = loader.load(getClass().getResource("PrincipaleAdmin.fxml").openStream());
-                AdminController ad = loader.getController();
-                //user = login.getData(user);
                 Scene scene = new Scene(root, 854, 480);
                 primaryStage.setScene(scene);
                 primaryStage.show();
@@ -85,6 +86,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Metodo si attiva premendo il bottone di registrazione.
+     * effettua il passaggio alla interfaccia di registrazione
+     * @param actionEvent
+     */
     public void registerButtonPressed(ActionEvent actionEvent) {
         try {
             ((Node)actionEvent.getSource()).getScene().getWindow().hide();
@@ -98,7 +104,6 @@ public class LoginController {
         catch (IOException e){
             e.printStackTrace();
         }
-
     }
 }
 

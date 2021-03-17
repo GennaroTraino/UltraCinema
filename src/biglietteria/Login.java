@@ -49,9 +49,9 @@ public class Login {
     }
 
     /**
-     * Metodo che permette di ricevere i dati dell'utente completi (avendo email e password)
+     * Metodo che permette di ricevere i dati di un utente completi (avendo email e password)
      * @param user
-     * @return
+     * @return oggetto user (privo di password)
      */
     public User getData(User user) throws SQLException {
         // Query
@@ -85,11 +85,12 @@ public class Login {
         return user;
     }
 
-    public boolean checkLoginAdmin(User user) throws SQLException {
-
-        if(user.getEmail().toUpperCase().equals("ADMIN") && user.getPassword().equals("admin")) {
-            return true;
-        }
-        return false;
+    /**
+     * Metodo controlla se le credenziali inserite sono quelle di Admin e ritorna vero
+     * @param user oggetto user che salva le credenziali
+     * @return vero se admin, falso altrimenti
+     */
+    public boolean checkLoginAdmin(User user) {
+        return user.getEmail().equalsIgnoreCase("ADMIN") && user.getPassword().equals("admin");
     }
 }

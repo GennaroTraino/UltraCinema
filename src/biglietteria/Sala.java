@@ -41,22 +41,4 @@ public class Sala {
     public void setnPosti(int nPosti) {
         this.nPosti = nPosti;
     }
-
-
-    /**
-     * Aggiunge un orario di proiezione alla Sala
-     * @param orario
-     * @throws OrarioSalaException lancia un eccezione se l'orario che si vuole aggiungere
-     * è inferiore a tre ore dopo uno gia esistente
-     */
-
-    public void aggiungiOrario(LocalTime orario) throws OrarioSalaException{
-
-        for (LocalTime x : orari) {
-           if( x.getHour() > orario.minusHours(3).getHour() ) {
-                throw new OrarioSalaException();
-           }
-        }
-        orari.add(orario);
-    }
 }

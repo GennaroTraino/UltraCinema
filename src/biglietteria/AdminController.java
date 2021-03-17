@@ -7,10 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Classe di controllo per l'interfaccia Admin
+ * Classe di controllo per interfaccia Admin
  */
 public class AdminController implements Initializable{
 
@@ -92,7 +90,7 @@ public class AdminController implements Initializable{
      * l'operazione di aggiunta di un film in una sala
      */
     public void saveButtonPressed() {
-        String sala = salaBox.getSelectionModel().getSelectedItem();
+        nomeSala = salaBox.getSelectionModel().getSelectedItem();
         Float prezzo = Float.parseFloat(prezzoText.getText());
         manager.execute(new AggiornaFilmSala(movieName,nomeSala));
         manager.execute(new AggiornaPrezzoFilm(movieName,prezzo));
@@ -123,9 +121,7 @@ public class AdminController implements Initializable{
             ((Node) actionEvent.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
             primaryStage.setTitle("LOGIN");
-            FXMLLoader loader = new FXMLLoader();
-            Pane root = loader.load(getClass().getResource("Login.fxml"));
-            PagamentoController pag = loader.getController();
+            Pane root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Scene scene = new Scene(root, 600, 400);
             primaryStage.setScene(scene);
             primaryStage.show();
