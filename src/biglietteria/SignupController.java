@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Classe controller per interfaccia della registrazione
+ */
 public class SignupController {
     @FXML
     TextField emailField;
@@ -29,8 +32,8 @@ public class SignupController {
     Label errorLabel;
 
     //Variabili
-    private Signup signup = new Signup();
-    private User user = new User();
+    private final Signup signup = new Signup();
+    private final User user = new User();
     CommandManager manager = CommandManager.getInstance();
 
     /**
@@ -47,7 +50,7 @@ public class SignupController {
         if(!user.getNome().equals("") &&
                 !user.getEmail().equals("") &&
                 !user.getPassword().equals("") &&
-                !user.getDataDiNascita().equals("")) {
+                !user.getDataDiNascita().toString().equals("")) {
             // Controlla se l'utente non è già registrato
             if(!signup.checkUserRegistration(user)){
                 // Inserimento nel database
@@ -74,7 +77,7 @@ public class SignupController {
 
 
     /**
-     * Ritorno al Login
+     * Metodo per il ritorno al Login
      * @param actionEvent
      */
     public void loginButtonPressed(ActionEvent actionEvent) {

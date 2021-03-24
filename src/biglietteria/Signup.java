@@ -50,7 +50,11 @@ public class Signup {
         return false;
     }
 
-
+    /**
+     * Metodo per aggiungere un utente al database
+     * @param user
+     * @throws SQLException
+     */
     public void addUserToDatabase(User user) throws SQLException {
         PreparedStatement preparedStatement=null;
         try{

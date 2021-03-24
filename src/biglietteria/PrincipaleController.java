@@ -196,13 +196,14 @@ public class PrincipaleController implements Initializable {
         CommandManager manager = CommandManager.getInstance();
         if (manager.isStackUserEmpty()){
             refundButton.setVisible(false);
+        } else {
+            refundButton.setVisible(true);
         }
-        refundButton.setVisible(true);
 
         try {
             DBConnection db = DBConnection.getInstance();
             ArrayList<String> lista = db.getListaNomiFilm();
-            System.out.println(lista);
+            movieList.getItems().addAll(lista);
         } catch (SQLException e) {
             errorLabel.setText("ERRORE: IMPOSSIBILE CONTATTARE IL DATABASE");
             e.printStackTrace();
@@ -211,12 +212,12 @@ public class PrincipaleController implements Initializable {
 
     /**
      * Metodo richiamato per effettuare annullamento di un operazione, entro 10 minuti
-     * @param actionEvent
      */
-    public void Refund(ActionEvent actionEvent) {
+    public void Refund() {
         if(manager.undo()) {
             errorLabel.setText("BIGLIETTO ANNULLATO, RIMBORSO EFFETTUATO!!!");
-            refundButton.setVisible(false);
+            if (manager.isStackUserEmpty())
+                refundButton.setVisible(false);
         } else {
             errorLabel.setText("NESSUN RIMBORSO POSSIBILE");
         }

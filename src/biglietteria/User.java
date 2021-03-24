@@ -1,8 +1,6 @@
 package biglietteria;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 
 /**
  * Classe che definisce la struttura e gli attributi degli utenti

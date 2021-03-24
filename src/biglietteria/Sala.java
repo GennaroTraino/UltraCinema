@@ -1,9 +1,7 @@
 package biglietteria;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Classe Sala: definisce le caratteristiche di una sala
@@ -13,7 +11,7 @@ public class Sala {
     private String nomesala;
     private int nPosti;
     private Film film = null;
-    ArrayList<LocalTime> orari = new ArrayList<LocalTime>();
+    ArrayList<LocalTime> orari = new ArrayList<>();
 
     //Costruttore con nPosti
     public Sala(String nomesala,int nPosti){

@@ -88,7 +88,7 @@ public class CommandManager {
      * @return true se vuoto, fals altrimenti
      */
     public boolean isStackUserEmpty() {
-        if(stackUser.isEmpty()) {
+        if (stackUser.isEmpty()) {
             return true;
         }
         return false;

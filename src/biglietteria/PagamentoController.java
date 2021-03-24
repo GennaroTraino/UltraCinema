@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
+/**
+ * Classe che controlla l' interfaccia pagamento
+ */
 public class PagamentoController {
 
     @FXML
@@ -34,8 +36,12 @@ public class PagamentoController {
     private String tipo;
     CommandManager manager;
 
+    /**
+     * Metodo che parte quando viene premuto il button Paga.
+     * Per scopo didattico il rilevamento dei dati delle carte o dei contanti inseriti è simulato!
+     */
     @FXML
-    void Pay() {
+    public void Pay() {
         paymentLabel.setText("PAGAMENTO IN CORSO...");
         try {
             manager.execute(new AcquistaBiglietto(nomeSala, nomeFilm, user.getNome(),
@@ -78,6 +84,16 @@ public class PagamentoController {
     }
 
 
+    /**
+     * Metodo che si attiva alla partenza dell' interfaccia per ricevere i dati dal PrincipaleController
+     * @param user
+     * @param nomeFilm
+     * @param nomeSala
+     * @param prezzoFilm
+     * @param dataeOra
+     * @param tipo
+     * @param manager
+     */
     public void getData(User user, String nomeFilm, String nomeSala, Float prezzoFilm, LocalDateTime dataeOra,String tipo,CommandManager manager) {
         this.user = user;
         this.nomeFilm = nomeFilm;
@@ -113,6 +129,10 @@ public class PagamentoController {
         }
     }
 
+    /**
+     * Metodo si attiva quando viene premuto il pulsante home back
+     * @param actionEvent
+     */
     public void homeBack(ActionEvent actionEvent) {
 
         try {

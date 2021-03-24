@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
- *  * La classe implementa i metodi che vengono usati da LoginController
- *  * cioè il controlle dei dati dell'utente nel database
+ * La classe implementa i metodi che vengono richiamati nelle fasi di Login
+ * cioè dal LoginController
  */
 
 public class Login {

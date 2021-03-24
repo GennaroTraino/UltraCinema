@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -23,6 +25,8 @@ public class PopupBigliettoController {
     private Label oraLabel;
     @FXML
     private Label tipoBigliettoLabel;
+    @FXML
+    private AnchorPane Pane;
 
     String nomeFilm=null,nomeSala=null;
     LocalDateTime dataeOra=null;
@@ -46,6 +50,7 @@ public class PopupBigliettoController {
             tipoBigliettoLabel.setText("INTERO");
         } else {
             tipoBigliettoLabel.setText("RIDOTTO");
+            Pane.setStyle("-fx-background-color: #888888");
         }
     }
 }
