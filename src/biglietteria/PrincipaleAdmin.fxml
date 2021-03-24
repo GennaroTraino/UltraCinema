@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.AdminController">
+<AnchorPane prefHeight="480.0" prefWidth="854.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="biglietteria.AdminController">
    <children>
       <Label layoutX="320.0" layoutY="23.0" prefHeight="35.0" prefWidth="215.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="ADMIN CONTROL PANEL" textFill="#263238" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="319.0" AnchorPane.topAnchor="23.0">
          <font>

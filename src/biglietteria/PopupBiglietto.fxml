@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Pane" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biglietteria.PopupBigliettoController">
+<AnchorPane fx:id="Pane" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #263238;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="biglietteria.PopupBigliettoController">
    <children>
       <ImageView fx:id="logoImage" fitHeight="109.0" fitWidth="166.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
       <Label fx:id="usernameLabel" layoutX="246.0" layoutY="23.0" prefHeight="25.0" prefWidth="188.0" style="-fx-background-color: #fff951; -fx-background-radius: 10;" text="Gennaro Traino" textFill="#273237" AnchorPane.rightAnchor="166.0" AnchorPane.topAnchor="23.0">

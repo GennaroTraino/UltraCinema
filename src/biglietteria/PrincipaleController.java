@@ -194,7 +194,9 @@ public class PrincipaleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommandManager manager = CommandManager.getInstance();
-        refundButton.setVisible(!manager.isStackUserEmpty());
+        if (!manager.isStackUserEmpty()) {
+            refundButton.setVisible(true);
+        }
 
         try {
             DBConnection db = DBConnection.getInstance();
@@ -242,7 +244,6 @@ public class PrincipaleController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            System.out.println("IO EXCEPTION GENNY!!");
             e.printStackTrace();
         }
 

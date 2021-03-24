@@ -334,15 +334,15 @@ public class OperationReceiver {
             if(connection!=null) {
                 try {
                     connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
             if(preparedStatement!=null) {
                 try {
                     preparedStatement.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
