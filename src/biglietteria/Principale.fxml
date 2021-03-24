@@ -58,5 +58,10 @@
             <Font name="Dubai Bold" size="18.0" />
          </font>
       </Button>
+      <Button fx:id="ticketButton" layoutX="21.0" layoutY="233.0" mnemonicParsing="false" onAction="#showTickets" prefHeight="54.0" prefWidth="151.0" style="-fx-background-color: #ffffff;" text="Miei Biglietti">
+         <font>
+            <Font name="Dubai Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

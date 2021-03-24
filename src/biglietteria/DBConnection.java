@@ -327,4 +327,35 @@ public class DBConnection {
         }
         return null;
     }
+
+    /**
+     * Metodo che ritorna la lista dei biglietti ancora non usati di un utente
+     * @param nameUser
+     * @return
+     */
+    public ArrayList<Biglietto> getTickets(String nameUser) throws SQLException {
+        Connection connection = null;
+        String query = "SELECT * FROM biglietti WHERE name = ?";
+        connection = connect();
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1,nameUser);
+
+        ResultSet rs = ps.executeQuery();
+
+        ArrayList<Biglietto> tickets = new ArrayList<Biglietto>();
+        while(rs.next()) {
+            String nomesala = rs.getString("nomesala");
+            String nomefilm = rs.getString("nomefilm");
+            String name = rs.getString("name");
+            String data = rs.getString("data");
+            String ora = rs.getString("ora");
+            Boolean intero = rs.getBoolean("intero");
+            Float prezzo = rs.getFloat("prezzo");
+            if (LocalDate.now().isBefore(LocalDate.parse(data))) {
+                tickets.add(new Biglietto(name,intero,nomesala,nomefilm,prezzo,
+                        LocalDateTime.of(LocalDate.parse(data),LocalTime.parse(ora))));
+            }
+        }
+        return tickets;
+    }
 }

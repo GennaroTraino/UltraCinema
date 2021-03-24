@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
  */
 
 public class Biglietto {
-    private final User utente;
+    private final String utente;
     private final boolean intero;
-    private final Sala sala;
-    private final Film film;
+    private final String sala;
+    private final String film;
     private final float prezzo;
     private final LocalDateTime dataeora;
 
@@ -24,16 +24,38 @@ public class Biglietto {
      * @param dataeora
      */
 
-    public Biglietto(User utente,boolean intero,Sala sala, Film film, LocalDateTime dataeora){
+    public Biglietto(String utente,boolean intero,String sala, String film, float prezzo, LocalDateTime dataeora){
         this.film = film;
         this.sala = sala;
+        this.prezzo = prezzo;
         this.utente = utente;
         this.dataeora = dataeora;
-
-        //Ottieni prezzo dal film (se sono nel fine settimana)
-        this.prezzo = film.getPrezzo();
-
-        // if sotto per biglietto intero?? if(utente.eta)
         this.intero = intero;
     }
+
+    public String getUtente() {
+        return utente;
+    }
+
+    public boolean isIntero() {
+        return intero;
+    }
+
+    public String getSala() {
+        return sala;
+    }
+
+    public String getFilm() {
+        return film;
+    }
+
+    public float getPrezzo() {
+        return prezzo;
+    }
+
+    public LocalDateTime getDataeora() {
+        return dataeora;
+    }
+
+
 }

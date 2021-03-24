@@ -194,11 +194,7 @@ public class PrincipaleController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommandManager manager = CommandManager.getInstance();
-        if (manager.isStackUserEmpty()){
-            refundButton.setVisible(false);
-        } else {
-            refundButton.setVisible(true);
-        }
+        refundButton.setVisible(!manager.isStackUserEmpty());
 
         try {
             DBConnection db = DBConnection.getInstance();
@@ -221,5 +217,34 @@ public class PrincipaleController implements Initializable {
         } else {
             errorLabel.setText("NESSUN RIMBORSO POSSIBILE");
         }
+    }
+
+    public void showTickets() {
+        try {
+            DBConnection db = DBConnection.getInstance();
+            ArrayList<Biglietto> tickets = db.getTickets(usernameLabel.getText());
+
+            int i=0;
+            ArrayList<Stage> stages = new ArrayList<>();
+            for (Biglietto b : tickets) {
+                stages.add(new Stage());
+                stages.get(i).setTitle("Ticket");
+                FXMLLoader loaderbiglietto = new FXMLLoader();
+                Pane root = loaderbiglietto.load(getClass().getResource("PopupBiglietto.fxml").openStream());
+                PopupBigliettoController pc = loaderbiglietto.getController();
+                pc.getData(b.getFilm(),b.getSala(),b.getDataeora(),user);
+                Scene scene = new Scene(root, 600, 200);
+                stages.get(i).setScene(scene);
+                stages.get(i).show();
+                i++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("IO EXCEPTION GENNY!!");
+            e.printStackTrace();
+        }
+
     }
 }

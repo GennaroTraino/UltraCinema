@@ -1,6 +1,7 @@
 package biglietteria;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -74,13 +75,6 @@ public class CommandManager {
         }
         stackPagamento.peek().execute();
         stackPagamento.push(command);
-    }
-
-    /**
-     * Consente di pulire lo stack User
-     */
-    void clear() {
-        stackUser.clear();
     }
 
     /**
